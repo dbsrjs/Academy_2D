@@ -17,7 +17,9 @@ public class Player : MonoBehaviour
     [SerializeField] private List<Sprite> rightSP;
 
     [SerializeField] private Transform parent;
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private PlayerBullet pbullet;
+
+    [SerializeField] public float power = 0f;
 
     private SpriteAnimation sa;
 
@@ -64,6 +66,8 @@ public class Player : MonoBehaviour
     }
    void CreateBullet()
     {
-        Instantiate(bullet, parent);
+        PlayerBullet pb =  Instantiate(pbullet, transform);
+        pb.SetPower(power);
+        pb.transform.SetParent(parent);
     }
 }
