@@ -11,9 +11,15 @@ public struct Enemydata
 public abstract class Enemy : MonoBehaviour
 {
     public Enemydata ed = new Enemydata();
+    public Transform fireTrans;
+    public EnemyBullet eBullet;
+
     public List<Sprite> exprosionSprite;
     public List<Sprite> noramlSprite;
     public Sprite hitSprite;
+
+    protected private Player player;
+    public Transform parent;
 
     public abstract void Init();
     
@@ -22,16 +28,30 @@ public abstract class Enemy : MonoBehaviour
         if(ed.hp > 0)
         transform.Translate(new Vector2(0f, -(Time.deltaTime * ed.speed)));
     }
-    
-    // Update is called once per frame
+
+    float testTime = 0;
     void Update()
     {
         Move();
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+        if (player != null)
+        {
+            Vector2 vec = fireTrans.position - player.transform.position;
+            float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
+            fireTrans.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        }
+
+        testTime += Time.deltaTime;
+        if (testTime > 2f)
+        {
+            EnemyBullet bullet = Instantiate(eBullet, fireTrans);
+            bullet.transform.SetParent(parent);
+            testTime = 0;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(collision.gameObject);
+        //Destroy(collision.gameObject);
 
         if (collision.gameObject.GetComponent<PlayerBullet>())
         {
@@ -49,7 +69,6 @@ public abstract class Enemy : MonoBehaviour
             }
         }
     }
-
     public void Die()
     {
         Destroy(gameObject);

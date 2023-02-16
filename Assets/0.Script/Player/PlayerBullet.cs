@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    private float speed = 5f;
+    private float speed = 7f;
     [HideInInspector] public float power = 0;
 
     // Update is called once per frame
