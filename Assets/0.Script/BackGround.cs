@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class BackGround : MonoBehaviour
 {
-    [SerializeField] private Transform[] ButtomTs;
-    [SerializeField] private Transform[] MiddleTs;
-    [SerializeField] private Transform[] TopTs;
+    [SerializeField] private Transform[] buttomTs;
+    [SerializeField] private Transform[] middleTs;
+    [SerializeField] private Transform[] topTs;
 
     [SerializeField] private float buttomSpeed = 0f;
     [SerializeField] private float middleSpeed = 0f;
     [SerializeField] private float topSpeed = 0f;
 
-    [SerializeField] private float LastPos = 0f;
-    [SerializeField] private float InitPos = 0f;
+    [SerializeField] private float lastPos = 0f;
+    [SerializeField] private float initPos = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,29 +24,28 @@ public class BackGround : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (var item in ButtomTs)
+        foreach (var item in buttomTs)
         {
-            BGmove(item, buttomSpeed);
+            BGMove(item, buttomSpeed);
         }
 
-        foreach (var item in MiddleTs)
+        foreach (var item in middleTs)
         {
-            BGmove(item, middleSpeed);
+            BGMove(item, middleSpeed);
         }
 
-        foreach (var item in TopTs)
+        foreach (var item in topTs)
         {
-            BGmove(item, topSpeed);
+            BGMove(item, topSpeed);
         }
     }
 
-    void BGmove(Transform trans, float speed)
+    void BGMove(Transform trans, float speed)
     {
         trans.Translate(new Vector2(0f, -(Time.deltaTime * speed)));
-
-        if (trans.position.y < LastPos)
+        if (trans.position.y < lastPos)
         {
-            trans.position = new Vector3(0, InitPos);
+            trans.position = new Vector3(0, initPos);
         }
     }
 }

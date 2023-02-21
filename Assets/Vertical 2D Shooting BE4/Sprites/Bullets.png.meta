@@ -24,7 +24,7 @@ TextureImporter:
       213: 6112890488319390909
     second: Enemy Bullet 3
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -44,8 +44,6 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
-  vTOnly: 0
-  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -55,8 +53,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: 1
-    mipBias: 0
+    aniso: -1
+    mipBias: -100
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -77,14 +75,10 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
-  flipbookRows: 1
-  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  ignorePngGamma: 0
   applyGammaDecoding: 1
-  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -134,18 +128,6 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Server
-    maxTextureSize: 512
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -165,7 +147,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 8dccaf8c3e226a0428f7e896381ac92a
-      internalID: -3853900315991760761
+      internalID: 874343242196921964
       vertices: []
       indices: 
       edges: []
@@ -186,7 +168,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 9cc2ab879b914f4458dd7f4dc3ba118a
-      internalID: 874343242196921964
+      internalID: -7976837497307082302
       vertices: []
       indices: 
       edges: []
@@ -306,14 +288,6 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Enemy Bullet 1: -7779215486825634471
-      Follower Bullet: -7803065417098437583
-      Enemy Bullet 3: 6112890488319390909
-      Enemy Bullet 2: 830317617348258784
-      Player Bullet 1: 874343242196921964
-      Player Bullet 0: -3853900315991760761
-      Enemy Bullet 0: 7431529995326980795
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    private float speed = 7f;
+    private float speed = 6f;
     [HideInInspector] public float power = 0;
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector2(0f, Time.deltaTime * speed));        
+        transform.Translate(new Vector2(0f, Time.deltaTime * speed));
     }
 
     public void SetPower(float power)

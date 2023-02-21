@@ -29,7 +29,7 @@ public class SpriteAnimation : MonoBehaviour
             return;
 
         delayTime += Time.deltaTime;
-        if (delayTime > spriteDelayTime)
+        if(delayTime > spriteDelayTime)
         {
             delayTime = 0;
             sr.sprite = sprites[spriteAnimationIndex];
@@ -37,16 +37,16 @@ public class SpriteAnimation : MonoBehaviour
 
             if (spriteAnimationIndex > sprites.Count - 1)
             {
-                if (action == null)
+                if(action == null)
                     spriteAnimationIndex = 0;
                 else
                 {
                     sprites.Clear();
                     action();
                     action = null;
-                }                
+                }
             }
-        }               
+        }
     }
 
     void Init()
@@ -71,7 +71,7 @@ public class SpriteAnimation : MonoBehaviour
         spriteDelayTime = delayTime;
     }
 
-    public void SetSprite(Sprite sprite, List<Sprite> argSprites, float delatTime)
+    public void SetSprite(Sprite sprite, List<Sprite> argSprites, float delayTime)
     {
         Init();
         sr.sprite = sprite;
