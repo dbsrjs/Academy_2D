@@ -175,6 +175,10 @@ public abstract class Enemy : MonoBehaviour
 
     public void Die()
     {
+        if (ed.isBoss)
+        {
+            EnemyController.Instance.StageUp();
+        }
         ItemController.Instace.Spwan(transform);
         Destroy(gameObject);
     }
