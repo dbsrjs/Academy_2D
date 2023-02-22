@@ -7,7 +7,7 @@ public class Boss : Enemy
     public override void Init()
     {
         ed.speed = 1f;
-        ed.hp = 1000f;
+        ed.hp = 2000f;
         ed.isBoss = true;
         ed.fireNormalTime = 0.5f;
         player = FindObjectOfType<Player>();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIController : MonoBehaviour
@@ -9,6 +10,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text scoreTxt;
 
     [SerializeField] PlayerBoom pd;
+
+    [SerializeField] private List<Image> srs;
 
     int score = 0;
     public int Score
@@ -34,5 +37,18 @@ public class UIController : MonoBehaviour
     public void OnFireBoom()
     {
         Instantiate(pd);
+    }
+
+    public void LifeChange(int life)
+    {
+        foreach (var item in srs)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < life; i++)
+        {
+            srs[i].gameObject.SetActive(true);
+        }
     }
 }

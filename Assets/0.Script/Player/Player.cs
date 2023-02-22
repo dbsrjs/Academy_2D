@@ -19,12 +19,17 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform parent;
     [SerializeField] private GameObject pBullet;
 
+    [SerializeField] private List<SubPlayer> follows;
+
     [SerializeField] private float power = 0f;
 
     private SpriteAnimation sa;
 
     private float speed = 5f;
     private int bulletLevel = 0;
+    private int life = 3;
+
+    private int followidx = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -32,12 +37,16 @@ public class Player : MonoBehaviour
         sa = GetComponent<SpriteAnimation>();
         sa.SetSprite(centerSp, 0.2f);
 
+        UIController.Instance.LifeChange(life);
         InvokeRepeating("CreateBullet", 1f, 0.2f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (life < 0)
+            return;
+
         // 캐릭터 이동 범위 지정
         float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;
         float clampX = Mathf.Clamp(transform.position.x + x, -2.5f, 2.5f);
@@ -72,7 +81,7 @@ public class Player : MonoBehaviour
         {
             PlayerBullet pb  = obj.transform.GetChild(i).GetComponent<PlayerBullet>();
             pb.SetPower(power);
-            pb.transform.localPosition = new Vector2(0f, 0.7f);           
+            //pb.transform.localPosition = new Vector2(0f, 0.7f);           
         }
         obj.transform.SetParent(parent);
     }
@@ -89,7 +98,46 @@ public class Player : MonoBehaviour
                     bulletLevel = 4;
                 pBullet = Resources.Load<GameObject>($"pBullet {bulletLevel}");
             }
+            else if (collision.GetComponent<Follow>())
+            {
+                if (followidx <= follows.Count)
+                {
+                    follows[followidx].gameObject.SetActive(true);
+                    followidx++;
+                }               
+            }
+        }
+        else if (collision.GetComponent<EnemyBullet>())
+        {
+            life--;
+            if (life > 0)
+                StartCoroutine("DieAnimation");
+            else
+            {
+                CancelInvoke("CreateBullet");
+                GetComponent<BoxCollider2D>().enabled = false;
+                GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
+            }
+           
         }
         Destroy(collision.gameObject);
+    }
+
+    // 내 비행기 라이프가 깍일때
+    IEnumerator DieAnimation()
+    {
+        CancelInvoke("CreateBullet");
+        GetComponent<BoxCollider2D>().enabled = false;
+        for (int i = 0; i < 3; i++)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
+            yield return new WaitForSeconds(0.2f);
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.7f);
+            yield return new WaitForSeconds(0.2f);
+        }
+        InvokeRepeating("CreateBullet", 0f, 0.2f);
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+        GetComponent<BoxCollider2D>().enabled = true;        
     }
 }

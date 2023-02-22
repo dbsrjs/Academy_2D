@@ -156,9 +156,20 @@ public abstract class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerBullet>())
+        if (collision.gameObject.GetComponent<PlayerBullet>() ||
+            collision.gameObject.GetComponent<FollowBullet>() )
         {
-            ed.hp -= collision.gameObject.GetComponent<PlayerBullet>().power;
+            // 총알 데미지 처리
+            float power = 0;       
+            if(collision.gameObject.GetComponent<PlayerBullet>())
+            {
+                power = collision.gameObject.GetComponent<PlayerBullet>().power;
+            }
+            else if(collision.gameObject.GetComponent<FollowBullet>())
+            {
+                power = collision.gameObject.GetComponent<FollowBullet>().power;
+            }
+            ed.hp -= power;
 
             if (ed.hp <= 0)
             {

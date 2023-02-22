@@ -72,7 +72,7 @@ TextureImporter:
       213: -4676655390728407469
     second: Follower
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -92,6 +92,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -101,11 +103,11 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: -1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -123,10 +125,14 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -166,6 +172,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
@@ -636,7 +654,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 53d00659e31608800800000000000000
-      internalID: 612596470744354101
+      internalID: -115133729626271356
       vertices: []
       indices: 
       edges: []
@@ -657,7 +675,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 356b7ba33be291fb0800000000000000
-      internalID: -4676655390728407469
+      internalID: 612596470744354101
       vertices: []
       indices: 
       edges: []
@@ -672,6 +690,30 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Boom 0: -2064859774160998932
+      Boom 1: -3694533877916086887
+      Boom 2: 2029542551908640097
+      Boom 3: -2821042892349479055
+      Boom 4: -4261047623482395726
+      Boom 5: 3719068211130651045
+      Boom 6: 5248844365648247204
+      Boom 7: -7652154954077232485
+      Boom 8: -3004918560657441691
+      Coin 0: -2421343691936151383
+      Coin 1: -9075936618163766259
+      Coin 2: 1013099012324604318
+      Coin 3: -115133729626271356
+      Follower: 612596470744354101
+      Power 0: 8033092973025764044
+      Power 1: 4337684191699249041
+      Power 2: -488721925442295091
+      Power 3: -7573354855677281409
+      Power 4: 1801263428120863714
+      Power 5: -5971942374765049077
+      Power 6: 4639506938558671751
+      Power 7: -6099050445329199328
+      Power 8: -7855203551248514480
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
