@@ -11,6 +11,7 @@ public struct EnemyData
     public float rotZ;
     public int paIdx;
     public bool isRot;
+    public int score;
 }
 
 public abstract class Enemy : MonoBehaviour
@@ -25,6 +26,8 @@ public abstract class Enemy : MonoBehaviour
 
     protected Transform parent;
     protected Player player;
+
+   
 
     int fireIndex = 0;
     float fireTime = 0;
@@ -191,6 +194,7 @@ public abstract class Enemy : MonoBehaviour
             EnemyController.Instance.StageUp();
         }
         ItemController.Instace.Spwan(transform);
+        UIController.Instance.Score += ed.score;
         Destroy(gameObject);
     }
 }

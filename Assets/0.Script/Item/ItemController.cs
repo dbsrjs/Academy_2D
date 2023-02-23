@@ -15,12 +15,11 @@ public class ItemController : MonoBehaviour
     }
 
     /// <summary>
-    /// 아이템 드랍 0 폭탄 1 파워 2 코인
-    /// </summary>
+    /// 아이템 드랍 0:폭탄 1:파워 2:코인3:보조
+    /// <summary>
     public void Spwan(Transform trans = null)
     {
         int rand = Random.Range(0, 100);
-        rand = 100;
         int itemIndex = rand <= 75 ? 0 : rand <= 85 ? 1 : rand <= 95 ? 2 : 3;
         if (trans != null)
         {

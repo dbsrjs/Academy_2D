@@ -8,6 +8,7 @@ public class HardEnemy : Enemy
     {
         ed.speed = Random.Range(3, 6) * 0.1f;
         ed.hp = 500f;
+        ed.score += 30;
         ed.isBoss = false;
         ed.fireNormalTime = 1f;
         player = FindObjectOfType<Player>();

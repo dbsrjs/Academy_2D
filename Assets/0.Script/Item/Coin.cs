@@ -6,7 +6,7 @@ public class Coin : Item
 {
     public override void Get()
     {
-        UIController.Instance.Score += 10;
+        UIController.Instance.Score += 50;
     }
 
     public override void Init()

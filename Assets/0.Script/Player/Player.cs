@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float power = 0f;
 
+    [HideInInspector] public int boom = 0;
+
     private SpriteAnimation sa;
 
     private float speed = 5f;
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour
         sa.SetSprite(centerSp, 0.2f);
 
         UIController.Instance.LifeChange(life);
+        UIController.Instance.BoomChange(boom);
         InvokeRepeating("CreateBullet", 1f, 0.2f);
     }
 
@@ -72,6 +75,14 @@ public class Player : MonoBehaviour
             dir = Direction.Center;
             sa.SetSprite(centerSp[0], centerSp, 0.2f);
         }
+
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            if (boom > 0)
+            {
+                UIController.Instance.OnFireBoom();
+            }
+        }
     }
 
      void CreateBullet()
@@ -97,14 +108,23 @@ public class Player : MonoBehaviour
                 if (bulletLevel > 4)
                     bulletLevel = 4;
                 pBullet = Resources.Load<GameObject>($"pBullet {bulletLevel}");
+                UIController.Instance.Score += 20;
             }
             else if (collision.GetComponent<Follow>())
             {
-                if (followidx <= follows.Count)
+                if (followidx < follows.Count)
                 {
-                    follows[followidx].gameObject.SetActive(true);
+                    follows[followidx].show();
                     followidx++;
                 }               
+            }
+            else if (collision.GetComponent<Boom>())
+            {
+                boom++;
+                if (boom > 1)
+                    boom = 2;
+                UIController.Instance.BoomChange(boom);
+                UIController.Instance.Score += 20;
             }
         }
         else if (collision.GetComponent<EnemyBullet>())
@@ -115,8 +135,13 @@ public class Player : MonoBehaviour
             else
             {
                 CancelInvoke("CreateBullet");
+                transform.GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(1).gameObject.SetActive(false);
                 GetComponent<BoxCollider2D>().enabled = false;
                 GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
+
+                Time.timeScale = 0;
+                UIController.Instance.Popup(true);
             }
            
         }

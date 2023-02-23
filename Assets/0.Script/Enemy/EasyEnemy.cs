@@ -8,6 +8,7 @@ public class EasyEnemy : Enemy
     {
         ed.speed = 1f;
         ed.hp = 100f;
+        ed.score += 10;
         ed.isBoss = false;
         ed.fireNormalTime = 2f;
         player = FindObjectOfType<Player>();
