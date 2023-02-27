@@ -27,7 +27,7 @@ public abstract class Enemy : MonoBehaviour
     protected Transform parent;
     protected Player player;
 
-   
+
 
     int fireIndex = 0;
     float fireTime = 0;
@@ -43,7 +43,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (ed.isBoss)
         {
-            if(transform.localPosition.y >= 3)
+            if (transform.localPosition.y >= 3)
             {
                 if (ed.hp > 0)
                     transform.Translate(new Vector2(0f, -(Time.deltaTime * ed.speed)));
@@ -56,7 +56,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    
+
     void Update()
     {
         Move();
@@ -64,11 +64,11 @@ public abstract class Enemy : MonoBehaviour
         ATTPatten();
     }
 
-    
+
     private void ATTPatten()
     {
         fireTime += Time.deltaTime;
-        switch(ed.paIdx)
+        switch (ed.paIdx)
         {
             case 0:
 
@@ -97,7 +97,7 @@ public abstract class Enemy : MonoBehaviour
                     ed.rotZ += 5f;
 
                     CreateBullet(transform.GetChild(1).transform);
-                    if(ed.rotZ > 350)
+                    if (ed.rotZ > 350)
                     {
                         PattenChange();
                     }
@@ -106,7 +106,7 @@ public abstract class Enemy : MonoBehaviour
             case 2:
                 if (fireTime > 0.2f)
                 {
-                    if(ed.isRot)
+                    if (ed.isRot)
                     {
                         if (ed.rotZ >= 60)
                         {
@@ -120,7 +120,7 @@ public abstract class Enemy : MonoBehaviour
                     }
                     else
                     {
-                        if(ed.rotZ <= -60)
+                        if (ed.rotZ <= -60)
                         {
                             ed.isRot = true;
                             if (Random.Range(0, 100) < 20)
@@ -160,15 +160,15 @@ public abstract class Enemy : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<PlayerBullet>() ||
-            collision.gameObject.GetComponent<FollowBullet>() )
+            collision.gameObject.GetComponent<FollowBullet>())
         {
             // 총알 데미지 처리
-            float power = 0;       
-            if(collision.gameObject.GetComponent<PlayerBullet>())
+            float power = 0;
+            if (collision.gameObject.GetComponent<PlayerBullet>())
             {
                 power = collision.gameObject.GetComponent<PlayerBullet>().power;
             }
-            else if(collision.gameObject.GetComponent<FollowBullet>())
+            else if (collision.gameObject.GetComponent<FollowBullet>())
             {
                 power = collision.gameObject.GetComponent<FollowBullet>().power;
             }
