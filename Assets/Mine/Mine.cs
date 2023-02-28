@@ -5,10 +5,11 @@ using UnityEngine;
 public class Mine : MonoBehaviour
 {
     [SerializeField] private GameObject image;
+    [SerializeField] private GameObject screen;
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -16,12 +17,18 @@ public class Mine : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log(gameObject.name);
+            Debug.Log(transform.name);
         }
 
+        ImageOpen();
+
+    }
+
+    private void ImageOpen()
+    {
         if (Input.GetMouseButtonDown(0))
         {
-            image.SetActive(false);
+            screen.SetActive(false);
         }
     }
 }
