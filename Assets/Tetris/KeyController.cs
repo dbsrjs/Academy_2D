@@ -13,7 +13,7 @@ public class KeyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()  
     {
-        
+       //block.transform.localPosition = new Vector3(-36.5f, 693.5f);
     }
 
     // Update is called once per frame

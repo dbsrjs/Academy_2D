@@ -44,9 +44,9 @@ public class Tetirs : MonoBehaviour
 
     private void BlockStop()
     {
-        //if()
-        //{
+        if (true)
+        {
 
-        //}
+        }
     }
 }
