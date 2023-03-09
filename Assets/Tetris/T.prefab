@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d36ff620012344c929165e2f88f24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cube: {fileID: 6683750633813075967}
+  block: {fileID: 6683750633813075967}
 --- !u!1 &6683750634500098141
 GameObject:
   m_ObjectHideFlags: 0
