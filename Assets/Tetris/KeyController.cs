@@ -9,6 +9,7 @@ public class KeyController : MonoBehaviour
     float moveX = 0;
     float moveY = 0;
     float autoDownTime = 0;
+
     // Start is called before the first frame update
     void Start()  
     {
@@ -45,7 +46,6 @@ public class KeyController : MonoBehaviour
             BlockDown();
         }
     }
-
     void BlockDown()
     {
         moveY -= 73f;

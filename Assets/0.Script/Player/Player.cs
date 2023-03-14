@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
         {
             PlayerBullet pb  = obj.transform.GetChild(i).GetComponent<PlayerBullet>();
             pb.SetPower(power);
-            //pb.transform.localPosition = new Vector2(0f, 0.7f);           
+            //pb.transform.localPosition = new Vector2(0f, 0.7f);
         }
         obj.transform.SetParent(parent);
     }

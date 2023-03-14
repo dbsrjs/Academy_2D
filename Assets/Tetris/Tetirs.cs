@@ -7,8 +7,9 @@ public class Tetirs : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;
     [SerializeField] private Transform parent;
-    [SerializeField] private GameObject target;
     
+    [SerializeField] private GameObject target;
+
     public int BlockXcnt { get; set; }
     public int BlockYcnt { get; set; }
 
@@ -32,21 +33,20 @@ public class Tetirs : MonoBehaviour
             Instantiate(prefab, parent);
         }
         StartCoroutine(GridOff());
-    }
 
-    IEnumerator GridOff()
-    {
-        yield return new WaitForSeconds(0.02f);
-        GetComponent<GridLayoutGroup>().enabled = false;
-        startPos = blocks[BlockXcnt / 2].transform.localPosition;
-        target.transform.localPosition = startPos;
-    }
-
-    private void BlockStop()
-    {
-        if (true)
+        IEnumerator GridOff()
         {
-
+            yield return new WaitForSeconds(0.02f);
+            GetComponent<GridLayoutGroup>().enabled = false;
+            startPos = blocks[BlockXcnt / 2].transform.localPosition;
+            target.transform.localPosition = startPos;
         }
     }
+
+    public void DropBlock()
+    {
+
+    }
+    
+
 }

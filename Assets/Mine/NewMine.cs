@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class NewMine : MonoBehaviour
 {
     [SerializeField] private Image mineImage;
-    [SerializeField] private TMPro.TMP_Text numText;
+    [SerializeField] private TMP_Text numText;
     [SerializeField] private Image panel;
 
     int val, x, y;
@@ -17,7 +18,7 @@ public class NewMine : MonoBehaviour
         this.x = x;
         this.y = y;
 
-        switch(val)
+        switch (val)
         {
             case -1:
                 mineImage.gameObject.SetActive(true);
@@ -28,12 +29,12 @@ public class NewMine : MonoBehaviour
                 numText.gameObject.SetActive(true);
                 numText.text = string.Empty;
                 break;
-            default:
+                 default:
                 mineImage.gameObject.SetActive(false);
                 numText.gameObject.SetActive(true);
                 numText.text = val.ToString();
                 break;
-        }      
+        }
     }
     public void OnPanelOpen()
     {
