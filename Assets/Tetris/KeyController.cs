@@ -10,15 +10,9 @@ public class KeyController : MonoBehaviour
     float moveY = 0;
     float autoDownTime = 0;
 
-    // Start is called before the first frame update
-    void Start()  
-    {
-       //block.transform.localPosition = new Vector3(-36.5f, 693.5f);
-    }
-
     // Update is called once per frame
     void Update()
-    {
+    { /*
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
             block.transform.Rotate(Vector3.forward * 90 * -1);
@@ -37,7 +31,7 @@ public class KeyController : MonoBehaviour
         {
             BlockDown();
             autoDownTime = 0;
-        }
+        } */
 
         autoDownTime += Time.deltaTime;
         if (autoDownTime > 0.8f)
@@ -48,6 +42,7 @@ public class KeyController : MonoBehaviour
     }
     void BlockDown()
     {
+        transform.Translate(new Vector2(0f, 0));
         moveY -= 73f;
         block.transform.localPosition = new Vector3(moveX, moveY);
     }

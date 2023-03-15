@@ -9,6 +9,7 @@ public class Tetirs : MonoBehaviour
     [SerializeField] private Transform parent;
     
     [SerializeField] private GameObject target;
+    [SerializeField] private Transform blockParent;
 
     public int BlockXcnt { get; set; }
     public int BlockYcnt { get; set; }
@@ -20,33 +21,33 @@ public class Tetirs : MonoBehaviour
     {
         BlockXcnt = 10;
         BlockYcnt = 20;
-
+        
         GetComponent<GridLayoutGroup>().constraintCount = BlockXcnt;
 
         CreateBGBlock();
+
+        CreatBlock();
     }
 
     public void CreateBGBlock()
     {
         for (int i = 0; i < BlockXcnt * BlockYcnt; i++)
         {
-            Instantiate(prefab, parent);
+            blocks.Add(Instantiate(prefab, parent));
         }
-        StartCoroutine(GridOff());
-
-        IEnumerator GridOff()
-        {
-            yield return new WaitForSeconds(0.02f);
-            GetComponent<GridLayoutGroup>().enabled = false;
-            startPos = blocks[BlockXcnt / 2].transform.localPosition;
-            target.transform.localPosition = startPos;
-        }
+        StartCoroutine(GridOff());        
     }
 
-    public void DropBlock()
+    public void CreatBlock()
     {
-
+        Instantiate(target, blockParent);
     }
-    
 
+    IEnumerator GridOff()
+    {
+        yield return new WaitForSeconds(0.02f);
+        GetComponent<GridLayoutGroup>().enabled = false;
+        startPos = blocks[BlockXcnt / 2].transform.localPosition;
+        target.transform.localPosition = startPos;
+    }
 }

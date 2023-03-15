@@ -20,7 +20,7 @@ public class ItemController : MonoBehaviour
     public void Spwan(Transform trans = null)
     {
         int rand = Random.Range(0, 100);        
-        int itemIndex = rand <= 75 ? 0 : rand <= 85 ? 1 : rand <= 95 ? 2 : 3;
+        int itemIndex = rand <= 55 ? 0 : rand <= 85 ? 1 : rand <= 40 ? 2 : 3;
         if (trans != null)
         {
             Item item = Instantiate(items[itemIndex], trans);
