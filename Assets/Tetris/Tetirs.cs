@@ -29,7 +29,7 @@ public class Tetirs : MonoBehaviour
         CreatBlock();
     }
 
-    public void CreateBGBlock()
+    public void CreateBGBlock() ///백그라운드 생성
     {
         for (int i = 0; i < BlockXcnt * BlockYcnt; i++)
         {
@@ -38,7 +38,7 @@ public class Tetirs : MonoBehaviour
         StartCoroutine(GridOff());        
     }
 
-    public void CreatBlock()
+    public void CreatBlock() ///블럭 생성
     {
         Instantiate(target, blockParent);
     }

@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 6683750633813075967}
+  ima: {fileID: 1962797785201614809, guid: 13ff661cc8bb7b043a7fe35cf5c5af53, type: 3}
 --- !u!1 &6683750634500098141
 GameObject:
   m_ObjectHideFlags: 0

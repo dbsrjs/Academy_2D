@@ -7,43 +7,50 @@ public class KeyController : MonoBehaviour
     [SerializeField] private GameObject block;
 
     float moveX = 0;
-    float moveY = 0;
     float autoDownTime = 0;
-
     // Update is called once per frame
     void Update()
-    { /*
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             block.transform.Rotate(Vector3.forward * 90 * -1);
         }
-        else if(Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            moveX -= 73f;
-            block.transform.localPosition = new Vector3(moveX, moveY);
+            Vector2 vec = new Vector2(-73, 0);
+            block.transform.Translate(vec);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            moveX += 73f;
-            block.transform.localPosition = new Vector3(moveX, moveY);
+            Vector2 vec = new Vector2(73, 0);
+            block.transform.Translate(vec);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             BlockDown();
             autoDownTime = 0;
-        } */
-
-        autoDownTime += Time.deltaTime;
-        if (autoDownTime > 0.8f)
-        {
-            autoDownTime = 0;
-            BlockDown();
         }
+
+        //autoDownTime += Time.deltaTime;
+        //if (autoDownTime > 0.8f) ///자동 줄 내림
+        //{
+        //    autoDownTime = 0;
+        //    BlockDown();
+        //}
     }
     void BlockDown()
     {
-        transform.Translate(new Vector2(0f, 0));
-        moveY -= 73f;
-        block.transform.localPosition = new Vector3(moveX, moveY);
+        Vector2 vec = new Vector2(0, -73);
+        transform.Translate(vec);
     }
+
+    void BlockStop()    ///-693.5
+    {
+        Vector2 vec = new Vector2(0, -693.5f);
+        if (true)
+        {
+            
+        }
+    }
+
 }
