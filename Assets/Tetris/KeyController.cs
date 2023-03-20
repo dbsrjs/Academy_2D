@@ -6,7 +6,6 @@ public class KeyController : MonoBehaviour
 {
     [SerializeField] private GameObject block;
 
-    float moveX = 0;
     float autoDownTime = 0;
     // Update is called once per frame
     void Update()
@@ -17,13 +16,11 @@ public class KeyController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            Vector2 vec = new Vector2(-73, 0);
-            block.transform.Translate(vec);
+            block.transform.localPosition -= new Vector3(73, 0, 0);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            Vector2 vec = new Vector2(73, 0);
-            block.transform.Translate(vec);
+            block.transform.localPosition += new Vector3(73, 0, 0);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -31,26 +28,23 @@ public class KeyController : MonoBehaviour
             autoDownTime = 0;
         }
 
-        //autoDownTime += Time.deltaTime;
-        //if (autoDownTime > 0.8f) ///자동 줄 내림
-        //{
-        //    autoDownTime = 0;
-        //    BlockDown();
-        //}
+        autoDownTime += Time.deltaTime;
+        if (autoDownTime > 0.8f) ///자동 줄 내림
+        {
+            autoDownTime = 0;
+            BlockDown();
+        }
     }
     void BlockDown()
     {
-        Vector2 vec = new Vector2(0, -73);
-        transform.Translate(vec);
+        block.transform.localPosition -= new Vector3(0, 73, 0);
     }
 
-    void BlockStop()    ///-693.5
+    public void BlockStop()    ///-693.5
     {
-        Vector2 vec = new Vector2(0, -693.5f);
         if (true)
         {
-            
+
         }
     }
-
 }
