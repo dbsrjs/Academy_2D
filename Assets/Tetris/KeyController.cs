@@ -40,7 +40,7 @@ public class KeyController : MonoBehaviour
         block.transform.localPosition -= new Vector3(0, 73, 0);
     }
 
-    public void BlockStop()    ///-693.5
+    void BlockStop()
     {
         if (true)
         {

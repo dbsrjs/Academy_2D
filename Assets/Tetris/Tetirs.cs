@@ -10,7 +10,6 @@ public class Tetirs : MonoBehaviour
     
     [SerializeField] private GameObject target;
     [SerializeField] private Transform blockParent;
-
     public int BlockXcnt { get; set; }
     public int BlockYcnt { get; set; }
 
@@ -28,7 +27,6 @@ public class Tetirs : MonoBehaviour
 
         CreatBlock();
     }
-
     public void CreateBGBlock() ///백그라운드 생성
     {
         for (int i = 0; i < BlockXcnt * BlockYcnt; i++)

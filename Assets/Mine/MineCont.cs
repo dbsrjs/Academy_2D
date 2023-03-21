@@ -15,7 +15,7 @@ public class MineCont : MonoBehaviour
 
     int[,] map;
 
-    [SerializeField] private int size = 5;
+    [SerializeField] private int size = 10;
     [SerializeField] private int mineCnt = 1;
 
     private List<List<NewMine>> mineList = new List<List<NewMine>>();
