@@ -10,22 +10,32 @@ public class KeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow)) ///방향 바꾸기
         {
             block.transform.Rotate(Vector3.forward * 90 * -1);
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)) ///왼쪽으로 이동
         {
-            block.transform.localPosition -= new Vector3(73, 0, 0);
+            if (block.transform.localPosition.x > -328.5f)
+            {
+                block.transform.localPosition -= new Vector3(73, 0, 0);
+            }            
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow)) ///오른쪽으로 이동
         {
-            block.transform.localPosition += new Vector3(73, 0, 0);
+            if (block.transform.localPosition.x < 328.5f)
+            {
+                block.transform.localPosition += new Vector3(73, 0, 0);
+            }                
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
+        else if (Input.GetKeyDown(KeyCode.DownArrow)) ///아래로 한칸 이동
+        {                    
             BlockDown();
-            autoDownTime = 0;
+            autoDownTime = 0;            
+        }
+        else if (Input.GetKeyDown(KeyCode.Space)) ///한번에 내리기
+        {
+
         }
 
         autoDownTime += Time.deltaTime;
@@ -37,14 +47,9 @@ public class KeyController : MonoBehaviour
     }
     void BlockDown()
     {
-        block.transform.localPosition -= new Vector3(0, 73, 0);
-    }
-
-    void BlockStop()
-    {
-        if (true)
+        if (block.transform.localPosition.y > -693.5f)
         {
-
-        }
+            block.transform.localPosition -= new Vector3(0, 73, 0);
+        }            
     }
 }

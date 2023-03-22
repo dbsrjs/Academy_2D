@@ -12,7 +12,6 @@ public class Tetirs : MonoBehaviour
     [SerializeField] private Transform blockParent;
     public int BlockXcnt { get; set; }
     public int BlockYcnt { get; set; }
-
     private Vector3 startPos;
     private List<GameObject> blocks = new List<GameObject>();
     // Start is called before the first frame update
@@ -33,7 +32,7 @@ public class Tetirs : MonoBehaviour
         {
             blocks.Add(Instantiate(prefab, parent));
         }
-        StartCoroutine(GridOff());        
+        StartCoroutine(GridOff());
     }
 
     public void CreatBlock() ///블럭 생성
