@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Tetirs : MonoBehaviour
 {
+    public KeyController kc;
+
     [SerializeField] private GameObject prefab;
     [SerializeField] private Transform parent;
     
@@ -37,7 +39,9 @@ public class Tetirs : MonoBehaviour
 
     public void CreatBlock() ///블럭 생성
     {
-        Instantiate(target, blockParent);
+        GameObject obj = Instantiate(target, blockParent);
+        kc.block = obj;
+
     }
 
     IEnumerator GridOff()

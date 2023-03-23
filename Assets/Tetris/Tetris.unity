@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 347905098}
+  - component: {fileID: 347905099}
   m_Layer: 0
   m_Name: KeyController
   m_TagString: Untagged
@@ -154,6 +155,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &347905099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347905097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d36ff620012344c929165e2f88f24f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tetris: {fileID: 1868703234}
+  block: {fileID: 0}
 --- !u!1 &678563338
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,6 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb1a995dc47a6a94e9d87fd1f651e8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kc: {fileID: 347905099}
   prefab: {fileID: 6835327875407209492, guid: 198a16ca3a995624ca077c1b9919039a, type: 3}
   parent: {fileID: 1868703233}
   target: {fileID: 6683750633813075967, guid: 96bb9fb0879b92f40be0b396044430d5, type: 3}
