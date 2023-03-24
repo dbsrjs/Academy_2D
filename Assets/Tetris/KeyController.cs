@@ -40,10 +40,22 @@ public class KeyController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space)) ///한번에 내리기
         {
-            
+            for (int i = 0; block.transform.localPosition.y != -693.5f; i++)
+            {
+                BlockDown();
+            }
+            tetris.CreatBlock();
         }
+
+        BlockDown_Auto();
+
+        BlockPile();
+    }
+
+    void BlockDown_Auto()   ///자동 줄 내림
+    {
         autoDownTime += Time.deltaTime;
-        if (autoDownTime > 0.8f) ///자동 줄 내림
+        if (autoDownTime > 0.8f) 
         {
             autoDownTime = 0;
             BlockDown();
@@ -61,7 +73,7 @@ public class KeyController : MonoBehaviour
         }
     }
 
-    void BlockPile()
+    void BlockPile() /// 테트리노 쌓기
     {
 
     }
