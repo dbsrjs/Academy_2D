@@ -36,7 +36,7 @@ public class KeyController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.DownArrow)) ///아래로 한칸 이동
         {                    
             BlockDown();
-            autoDownTime = 0;            
+            autoDownTime = 0;
         }
         else if (Input.GetKeyDown(KeyCode.Space)) ///한번에 내리기
         {
