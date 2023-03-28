@@ -10,18 +10,48 @@ public class NewBlock : MonoBehaviour
     public bool main;
 
     public Vector2 pos = new Vector2();
-    // Start is called before the first frame update
+
+    NewBGCont bgCont;
+    NewBlockCont blockCont;
+
     void Start()
     {
-        
+        bgCont = ContManger.instance.bgCont;
+        blockCont = ContManger.instance.blockCont;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        SetAutoXY(transform);
     }
 
+    public void SetXY(int x, int y)
+    {
+        this.x = this.x + x;
+        this.y = this.y + y;
+    }
+
+
+    public void SetAutoXY(Transform trans)
+    {
+        float distance = 100;
+        for (int i = 0; i < bgCont.BlockYcnt; i++)
+        {
+            for (int j = 0; j < bgCont.BlockXcnt; j++)
+            {
+                float dis = Vector2.Distance(bgCont.bgBlock[i][j].transform.position, trans.position);
+                if (dis < 0.001f)
+                {
+                    distance = dis;
+                    BGBlock bgB = bgCont.bgBlock[i][j].GetComponent<BGBlock>();
+                    x = bgB.X;
+                    y = bgB.Y;
+                    return;
+
+                }
+            }
+        }
+    }
     public void Rotate()
     {
         transform.parent.Rotate(new Vector3(0f, 0f, -90f));
@@ -29,37 +59,54 @@ public class NewBlock : MonoBehaviour
 
     public void Left()
     {
-        if (true)
-            return;
-
-        pos = new Vector2(pos.x - 73, pos.y);
-        transform.parent.localPosition = pos; 
-    }
+        if(isMoveX(-1))
+        {
+            pos = new Vector2(pos.x - 73, pos.y);
+            transform.parent.localPosition = pos;
+        }
+     }
 
     public void Right()
     {
-        if (true)
-            return;
-
-        pos = new Vector2(pos.x + 73, pos.y);
+        if(isMoveX(1))
+        {
+            pos = new Vector2(pos.x + 73, pos.y);
+            transform.parent.localPosition = pos;
+        }
     }
 
     public void Down()
     {
-        if(true)
+        if (isMoveY())
         {
             pos = new Vector2(pos.x, pos.y - 73);
             transform.parent.localPosition = pos;
-        }
-        else
+        }        
+    }
+    bool isMoveX(int val)
+    {
+        int count = 0;
+        for (int i = 0; i < transform.parent.childCount; i++)
         {
-
+            NewBlock b = transform.parent.GetChild(i).GetComponent<NewBlock>();
+            int x = b.x + val;
+            if (x >= 0 && x <= bgCont.BlockXcnt - 1)
+                count++;
         }
+
+        return count == transform.parent.childCount ? true : false;   ///count가 4면 true 아니면 false
     }
 
-    public void SetXY(int x, int y)
+    bool isMoveY()
     {
-        this.x = this.x + x;
-        this.y = this.y + y;
+        int count = 0;
+        for (int i = 0; i < transform.parent.childCount; i++)
+        {
+            NewBlock b = transform.parent.GetChild(i).GetComponent<NewBlock>();
+            if (b.y + 1 <= bgCont.BlockYcnt - 1)
+                count++;
+        }
+
+        return count == transform.parent.childCount ? true : false;
     }
 }

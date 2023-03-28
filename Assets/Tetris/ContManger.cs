@@ -6,7 +6,7 @@ public class ContManger : MonoBehaviour
 {
     public static ContManger instance;
 
-    public KeyController keyCont;
+    public NewKeyContoller keyCont;
     public NewBGCont bgCont;
     public NewBlockCont blockCont;
 

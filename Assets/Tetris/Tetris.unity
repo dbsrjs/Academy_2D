@@ -212,10 +212,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ada07890c1941d48921b4d196813393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blocks: []
-  parent: {fileID: 0}
-  finishB: {fileID: 0}
-  overPanel: {fileID: 0}
+  blocks:
+  - {fileID: 6683750633813075967, guid: 96bb9fb0879b92f40be0b396044430d5, type: 3}
+  parent: {fileID: 1102840253}
+  finishB: {fileID: 1102840253}
   fininshBlocks: []
 --- !u!1 &678563338
 GameObject:
@@ -403,7 +403,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1038437952
 GameObject:
@@ -452,8 +452,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17be4c9f0a2ecd8429a164357c6a986c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyCont: {fileID: 0}
-  bgCont: {fileID: 0}
+  keyCont: {fileID: 275674051}
+  bgCont: {fileID: 1580909886}
+  blockCont: {fileID: 320816793}
 --- !u!1 &1102840249
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac48eacd817b9fe4c9acfaab92d5ab5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6835327875407209492, guid: 198a16ca3a995624ca077c1b9919039a, type: 3}
+  prefab: {fileID: -9062918474140383522, guid: 198a16ca3a995624ca077c1b9919039a, type: 3}
   parent: {fileID: 1868703233}
   startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1868703232

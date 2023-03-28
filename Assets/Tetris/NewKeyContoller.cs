@@ -19,7 +19,23 @@ public class NewKeyContoller : MonoBehaviour
         keyMoveDelay += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-
+            ContManger.instance.blockCont.FindBlockMain().Rotate();
+        }
+        else if(Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            ContManger.instance.blockCont.FindBlockMain().Left();
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            ContManger.instance.blockCont.FindBlockMain().Right();
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            ContManger.instance.blockCont.FindBlockMain().Down();
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            
         }
     }
 }

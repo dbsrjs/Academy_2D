@@ -7,7 +7,6 @@ public class NewBlockCont : MonoBehaviour
     [SerializeField] List<GameObject> blocks;
     [SerializeField] Transform parent;
     [SerializeField] Transform finishB;
-    [SerializeField] GameObject overPanel;
     const int startPosY = 1;
 
     GameObject createObj;
@@ -18,7 +17,6 @@ public class NewBlockCont : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        overPanel.SetActive(false);
         bgCont = ContManger.instance.bgCont;
     }
 
@@ -36,9 +34,9 @@ public class NewBlockCont : MonoBehaviour
         b.pos = createObj.transform.localPosition;
     }
 
-    private NewBlock FindBlockMain()
+    public NewBlock FindBlockMain()
     {
-        for (int i = 0; i < createObj.transform.childCount i++)
+        for (int i = 0; i < createObj.transform.childCount; i++)
         {
             NewBlock b = createObj.transform.GetChild(i).GetComponent<NewBlock>();
             if (b.main)
