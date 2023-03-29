@@ -6,7 +6,12 @@ public class NewKeyContoller : MonoBehaviour
 {
     [HideInInspector] public GameObject block;
 
+    float autoDownTime;
+    float downTime = 2f;
+    [SerializeField]public bool autoDown;
+
     float keyMoveDelay = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +40,25 @@ public class NewKeyContoller : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            
+            autoDown = true;
+        }
+
+        autoDownTime += Time.deltaTime;
+        if (autoDown)
+        {
+            if (autoDownTime > 0.01f)
+            {
+                autoDownTime = 0;
+                ContManger.instance.blockCont.FindBlockMain().Down();
+            }
+        }
+        else
+        {
+            if (autoDownTime > downTime)
+            {
+                autoDownTime = 0;
+                ContManger.instance.blockCont.FindBlockMain().Down();
+            }
         }
     }
 }

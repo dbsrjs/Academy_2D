@@ -47,7 +47,6 @@ public class NewBlock : MonoBehaviour
                     x = bgB.X;
                     y = bgB.Y;
                     return;
-
                 }
             }
         }
@@ -77,11 +76,19 @@ public class NewBlock : MonoBehaviour
 
     public void Down()
     {
-        if (isMoveY())
+        if (IsCheckY() == true)
         {
             pos = new Vector2(pos.x, pos.y - 73);
             transform.parent.localPosition = pos;
-        }        
+        }
+        else
+        {
+            BlockDownFinish();
+            blockCont.SetParent();
+            blockCont.XLineDelete();
+            ContManger.instance.keyCont.autoDown = false;
+            blockCont.CreateBlock();
+        }
     }
     bool isMoveX(int val)
     {
@@ -90,23 +97,34 @@ public class NewBlock : MonoBehaviour
         {
             NewBlock b = transform.parent.GetChild(i).GetComponent<NewBlock>();
             int x = b.x + val;
-            if (x >= 0 && x <= bgCont.BlockXcnt - 1)
+            if (x >= 0 && x <= bgCont.BlockXcnt - 1 && bgCont.bgBlock[b.y][x].Check == false)
                 count++;
         }
 
         return count == transform.parent.childCount ? true : false;   ///count가 4면 true 아니면 false
     }
-
-    bool isMoveY()
+    bool IsCheckY()
     {
         int count = 0;
         for (int i = 0; i < transform.parent.childCount; i++)
         {
             NewBlock b = transform.parent.GetChild(i).GetComponent<NewBlock>();
-            if (b.y + 1 <= bgCont.BlockYcnt - 1)
+            if (b.y + 1 >= bgCont.BlockYcnt)
+                continue;
+
+            if (bgCont.bgBlock[b.y + 1][b.x].Check == false)
                 count++;
         }
 
         return count == transform.parent.childCount ? true : false;
+    }
+
+    void BlockDownFinish()
+    {
+        foreach (Transform trans in transform.parent)
+        {
+            NewBlock b = trans.GetComponent<NewBlock>();
+            bgCont.bgBlock[b.y][b.x].Check = true;
+        }
     }
 }

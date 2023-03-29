@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 0}
+  autoDown: 0
 --- !u!1 &320816791
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +216,7 @@ MonoBehaviour:
   blocks:
   - {fileID: 6683750633813075967, guid: 96bb9fb0879b92f40be0b396044430d5, type: 3}
   parent: {fileID: 1102840253}
-  finishB: {fileID: 1102840253}
+  finishB: {fileID: 731585272}
   fininshBlocks: []
 --- !u!1 &678563338
 GameObject:
