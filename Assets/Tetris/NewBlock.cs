@@ -11,13 +11,21 @@ public class NewBlock : MonoBehaviour
 
     public Vector2 pos = new Vector2();
 
+    public float SizeX { get; set; }
+    public float SizeY { get; set; }
+
     NewBGCont bgCont;
     NewBlockCont blockCont;
 
     void Start()
     {
+        SizeX = SizeY = 30;
         bgCont = ContManger.instance.bgCont;
         blockCont = ContManger.instance.blockCont;
+
+        GetComponent<RectTransform>().sizeDelta = new Vector2(SizeY - bgCont.spacingX, SizeY - bgCont.spacingY);
+        Vector2 vec2 = GetComponent<RectTransform>().localPosition;
+        GetComponent<RectTransform>().localPosition = new Vector2((vec2.x / 73f) * SizeX, (vec2.y / 73) * SizeY);
     }
 
     void Update()

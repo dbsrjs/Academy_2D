@@ -220,7 +220,7 @@ MonoBehaviour:
   X: 0
   Y: 0
   text: {fileID: 2614803161195964327}
-  isUICheck: 1
+  isUICheck: 0
 --- !u!114 &6835327875407209494
 MonoBehaviour:
   m_ObjectHideFlags: 0

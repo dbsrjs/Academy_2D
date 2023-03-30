@@ -77,6 +77,12 @@ public class NewBlockCont : MonoBehaviour
             LineDelete(y);
         }
 
+        delIndexs.Reverse();
+        foreach (int y in delIndexs)
+        {
+            LineDown(y);
+        }
+
         foreach (var item in delIndexs)
         {
             Debug.Log("Del : " + item);
@@ -104,6 +110,38 @@ public class NewBlockCont : MonoBehaviour
                 Destroy(b.gameObject);
                 fininshBlocks.Remove(b);
             }
+        }
+    }
+
+    void LineDown(int y)
+    {
+        for (int i = 0; i < fininshBlocks.Count; i++)
+        {
+            NewBlock b = fininshBlocks[i];
+            if(b.y <= y - 1)
+            {
+                Vector2 vec2 = b.transform.localPosition;
+                b.transform.localPosition = new Vector2(vec2.x, vec2.y - 73);
+                b.y++;
+            }
+        }
+        MapReflish();
+    }
+
+    void MapReflish()
+    {
+        for (int y = 0; y < bgCont.BlockYcnt; y++)
+        {
+            for (int x = 0; x < bgCont.BlockXcnt; x++)
+            {
+                bgCont.bgBlock[y][x].Check = false;
+            }
+        }
+
+        for (int i = 0; i < fininshBlocks.Count; i++)
+        {
+            NewBlock b = fininshBlocks[i];
+            bgCont.bgBlock[b.y][b.x].Check = true;
         }
     }
 }

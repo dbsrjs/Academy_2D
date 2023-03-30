@@ -7,13 +7,18 @@ public class NewBGCont : MonoBehaviour
 {
     [SerializeField] private BGBlock prefab;
     [SerializeField] private Transform parent;
+    [SerializeField] private AudioSource t_Audio;
 
     [HideInInspector] public Vector3 startPos;
 
     public List<List<BGBlock>> bgBlock = new List<List<BGBlock>>();
+    const int startYIndex = 1;
     public int BlockXcnt { get; set; }
     public int BlockYcnt { get; set; }
 
+    public float spacingX = 0;
+
+    public float spacingY = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +26,9 @@ public class NewBGCont : MonoBehaviour
         BlockYcnt = 20;
 
         parent.GetComponent<GridLayoutGroup>().constraintCount = BlockXcnt;
+
+        spacingX = parent.GetComponent<GridLayoutGroup>().constraintCount = BlockXcnt;
+        spacingY = parent.GetComponent<GridLayoutGroup>().constraintCount = BlockYcnt;
         CreateBGBlock();
     }
 
@@ -45,5 +53,10 @@ public class NewBGCont : MonoBehaviour
         parent.GetComponent<GridLayoutGroup>().enabled = false;
 
         ContManger.instance.blockCont.CreateBlock();
+    }
+
+    public void EffectSoundStart()
+    {
+        t_Audio.Play();
     }
 }

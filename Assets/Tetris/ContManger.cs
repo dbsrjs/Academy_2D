@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ContManger : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class ContManger : MonoBehaviour
     public NewKeyContoller keyCont;
     public NewBGCont bgCont;
     public NewBlockCont blockCont;
-
-    void Awake()
+    
+        void Awake()
     {
         instance = this;
     }
