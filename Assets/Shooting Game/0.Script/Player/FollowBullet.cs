@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowBullet : MonoBehaviour
 {
-    [HideInInspector] public float power = 10;
+    [HideInInspector] public float power = 20;
     float speed = 5;
 
     // Update is called once per frame
