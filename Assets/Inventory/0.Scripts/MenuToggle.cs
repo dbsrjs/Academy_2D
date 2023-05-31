@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class MenuToggle : MonoBehaviour
 {
-    [SerializeField] GameObject[] toggles;
+    [SerializeField] Toggle[] toggles;
+    [SerializeField] Image[] exposure;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +20,11 @@ public class MenuToggle : MonoBehaviour
         
     }
 
-    public void OnClick()
+    void Onclick()
     {
-        toggles[0].SetActive(false);
+        if (toggles[0].isOn == true)
+        {
+            
+        }
     }
 }
