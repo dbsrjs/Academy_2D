@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class MenuToggle : MonoBehaviour
 {
     [SerializeField] Toggle[] toggles;
-    [SerializeField] Image[] exposure;
-    
+    [SerializeField] ScrollRect[] view;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +20,7 @@ public class MenuToggle : MonoBehaviour
         
     }
 
-    void Onclick()
+    public void Onclick()
     {
         if (toggles[0].isOn == true)
         {
