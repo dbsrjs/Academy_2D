@@ -6,21 +6,47 @@ using UnityEngine.UI;
 public class MenuToggle : MonoBehaviour
 {
     [SerializeField] Toggle[] toggles;
-    [SerializeField] Toggle[] gameToggles;
     [SerializeField] GameObject[] view;
+
+    [SerializeField] private Transform[] parent;
+    [SerializeField] private GameObject prefab;
+
+    int i = 1;
     // Start is called before the first frame update
     void Start()
     {
-        ViewOff();
+        ViewOff();  //모든 스크롤뷰 끄기
+
+        while (i <= 25)     //전체
+        {
+            Instantiate(prefab, parent[0]);
+            i++;
+        }
+        i = 1;
+
+        while (i <= 13)     //장비
+        {
+            Instantiate(prefab, parent[1]);
+            i++;
+        }
+        i = 1;
+
+        while (i <= 4)      //음식
+        {
+            Instantiate(prefab, parent[2]);
+            i++;
+        }
+        i = 1;
+
+        while (i <= 8)      //기타
+        {
+            Instantiate(prefab, parent[3]);
+            i++;
+        }
+        i = 1;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void OnClick()
+    public void OnClick()   //나를 제외한 스크롤뷰 끄기
     {
         if (toggles[0].isOn == true)
         {
