@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -84,18 +85,16 @@ public class Player : MonoBehaviour
             }
         }
     }
-
      void CreateBullet()
-    {
+     {
         GameObject obj = Instantiate(pBullet, transform.GetChild(0));
         for (int i = 0; i < obj.transform.childCount; i++)
         {
             PlayerBullet pb  = obj.transform.GetChild(i).GetComponent<PlayerBullet>();
             pb.SetPower(power);
-            //pb.transform.localPosition = new Vector2(0f, 0.7f);
         }
         obj.transform.SetParent(parent);
-    }
+     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
