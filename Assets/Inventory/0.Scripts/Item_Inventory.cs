@@ -60,7 +60,7 @@ public class Item_Inventory : MonoBehaviour
     }
     public void OnClick()
     {
-        icon.gameObject.SetActive(true);
+        icon.gameObject.SetActive(false);
         level.text = string.Empty;
         upgeadeLevel.text = string.Empty;
         frame.sprite = frameSprites[0];
