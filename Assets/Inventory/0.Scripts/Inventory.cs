@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class Inventory : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class Inventory : MonoBehaviour
     int itemCount = 0;
     List<Item_Inventory> items = new List<Item_Inventory>();
 
-    List<string> itemeNames = new List<string>();
+    Dictionary<string, List<string>> dicItemNames = new Dictionary<string, List<string>>();
 
     public int ItemCount
     {
@@ -25,40 +26,69 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    int invenMaxCount = 10;
+    int invenMaxCount = 10;    //아이템 이미지의 최대 개수
 
     // Start is called before the first frame update
     void Start()
     {
-        string path = $"{Define.iconBasePath}/{IconType.Armor}/";
-        Sprite[] sprites = Resources.LoadAll<Sprite>(path);
-        foreach (var item in sprites)
+        string[] keys = { $"{IconType.Armor}", $"{IconType.Helmet}", $"{IconType.Boots}" };
+        string[] paths = {
+            $"{Define.iconBasePath}/{IconType.Armor}",
+            $"{Define.iconBasePath}/{IconType.Helmet}",
+            $"{Define.iconBasePath}/{IconType.Boots}"
+        };
+
+        foreach (var key in keys)
         {
-            itemeNames.Add(item.name);
+            if (!dicItemNames.ContainsKey(key))
+            {
+                dicItemNames.Add(key, new List<string>());
+            }
         }
 
-        for (int i = 0; i < invenMaxCount; i++)
+        int KeyCnt = 0;
+        foreach (var path in paths)
+        {
+            Sprite[] sprites = Resources.LoadAll<Sprite>(path);
+            foreach (var item in sprites)
+            {
+                dicItemNames[keys[KeyCnt]].Add(item.name);
+            }
+            KeyCnt++;
+        }
+
+        for (int i = 0; i < invenMaxCount; i++)     //배경을 invenMaxCount(10)개 생성
         {
             items.Add(Instantiate(item, parent));
         }
         itemCount = 0;
     }
+    int creatIdx = 0;
+
+    enum Type
+    {
+        Armor, Helmet, Boots
+    }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.F1))   //아이템 생성
         {
             ItemData id = new ItemData();
+            id.idx = creatIdx;
             id.lv = Random.Range(1, 100);   //랜덤 레벨
-            id.upradeLv = Random.Range(1, 31);  //강화 레벨
-            id.spriteName = itemeNames[Random.Range(0, itemeNames.Count)];
-            id.type = IconType.Armor;
+            id.upradeLv = Random.Range(1, 31);  //랜덤 강화 레벨
 
+            id.type = (Type)Random.Range(0, (int)Type.Boots + 1);
+            string key = id.type.ToString();
+            id.spriteName = dicItemNames[key][Random.Range(0, dicItemNames[key].Count)];
+
+            creatIdx++;
             foreach (var item in items)
             {
                 if(item.data  == null)
                 {
-                    item.SetData(id, SetItemCount).SetUI();
+                    item.SetData(id, () => ItemCount-- ).SetUI();
                     ItemCount++;
                     break;
                 }
@@ -66,8 +96,23 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void SetItemCount()
+    public void OnItemSort()  //정렬 버튼
     {
-        ItemCount--;
+        /*
+        List<Item_Inventory> tempItems = items.ToList();
+        tempItems.Sort((a, b) => a.data.idx.CompareTo(b.data.idx));
+
+        //아이템 데이터 교체
+        for (int i = 0; i < tempItems.Count; i++)
+        {
+            items[i].data = tempItems[i].data;
+        }
+
+        for (int i = 0; i < invenMaxCount; i++)
+        {
+            if (items[i].data != null)
+                items[i].SetData(item.data).SetUI();
+        }
+        */
     }
 }

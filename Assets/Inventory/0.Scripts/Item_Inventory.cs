@@ -58,15 +58,18 @@ public class Item_Inventory : MonoBehaviour
 
         return this;
     }
-    public void OnClick()
+    public void OnClick()   //이미지를 누르면 삭제
     {
         icon.gameObject.SetActive(false);
         level.text = string.Empty;
         upgeadeLevel.text = string.Empty;
         frame.sprite = frameSprites[0];
 
-        action();
-        action = null;
+        if(action != null)
+        {
+            action();
+            action = null;
+        }
         
         data = null;
     }
