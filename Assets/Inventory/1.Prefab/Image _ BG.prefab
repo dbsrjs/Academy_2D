@@ -278,7 +278,7 @@ MonoBehaviour:
   frame: {fileID: 6258067962996336619}
   icon: {fileID: 6258067962510698779}
   level: {fileID: 6258067962405241850}
-  upgeadeLevel: {fileID: 6258067963093571197}
+  upgradeLv: {fileID: 6258067963093571197}
 --- !u!222 &6258067962996336618
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Item_Inventory item;
     [SerializeField] private Transform parent;
     [SerializeField] private TMP_Text inventoryCountTxt;
+    [SerializeField] private Transform content;    //GameObject
 
     int itemCount = 0;
     List<Item_Inventory> items = new List<Item_Inventory>();
@@ -77,9 +78,11 @@ public class Inventory : MonoBehaviour
             ItemData id = new ItemData();
             id.idx = creatIdx;
             id.lv = Random.Range(1, 100);   //랜덤 레벨
-            id.upradeLv = Random.Range(1, 31);  //랜덤 강화 레벨
+            id.upgradeLv = Random.Range(1, 31);  //랜덤 강화 레벨
 
-            id.type = (Type)Random.Range(0, (int)Type.Boots + 1);
+            Type t = (Type)Random.Range(0, (int)Type.Boots + 1);
+            id.type = (IconType)System.Enum.Parse(typeof(IconType), t.ToString());
+
             string key = id.type.ToString();
             id.spriteName = dicItemNames[key][Random.Range(0, dicItemNames[key].Count)];
 
@@ -98,21 +101,34 @@ public class Inventory : MonoBehaviour
 
     public void OnItemSort()  //정렬 버튼
     {
-        /*
-        List<Item_Inventory> tempItems = items.ToList();
-        tempItems.Sort((a, b) => a.data.idx.CompareTo(b.data.idx));
+        items.Sort
+        (
+            delegate (Item_Inventory a1, Item_Inventory a2)
+            {
+                if (a1.data.type != a2.data.type)
+                {
+                    return a2.data.type.CompareTo(a1.data.type);
+                }
+                return a1.data.lv.CompareTo(a2.data.lv);
+            }
+        );
 
-        //아이템 데이터 교체
-        for (int i = 0; i < tempItems.Count; i++)
+        List<ItemData> dataList = new List<ItemData>();
+        foreach (var item in items)
         {
-            items[i].data = tempItems[i].data;
+            ItemData id = new ItemData();
+            id.idx = item.data.idx;
+            id.lv = item.data.lv;
+            id.spriteName = item.data.spriteName;
+            id.type = item.data.type;
+            id.upgradeLv = item.data.upgradeLv;
+            dataList.Add(id);
         }
 
-        for (int i = 0; i < invenMaxCount; i++)
+        for (int i = 0; i < content.childCount; i++)
         {
-            if (items[i].data != null)
-                items[i].SetData(item.data).SetUI();
+            ItemData id = dataList[i];
+            content.GetChild(i).GetComponent<Item_Inventory>().SetData(id, () => ItemCount--).SetUI();
         }
-        */
     }
 }

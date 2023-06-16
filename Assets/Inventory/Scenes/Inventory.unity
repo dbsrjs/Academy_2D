@@ -1753,6 +1753,7 @@ MonoBehaviour:
   item: {fileID: 7736671079043549201, guid: feafd8a700c893e428b1ffbd34b9bc42, type: 3}
   parent: {fileID: 674294201}
   inventoryCountTxt: {fileID: 144606405}
+  content: {fileID: 674294200}
 --- !u!1 &1595037617
 GameObject:
   m_ObjectHideFlags: 0

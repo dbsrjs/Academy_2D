@@ -10,7 +10,7 @@ public class ItemData
     public IconType type;
     public string spriteName;
     public int lv;
-    public int upradeLv;
+    public int upgradeLv;
 }
 
 public class ItemStruct : MonoBehaviour

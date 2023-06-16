@@ -12,7 +12,7 @@ public class Item_Inventory : MonoBehaviour
     [SerializeField] private Image frame;
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text level;
-    [SerializeField] private TMP_Text upgeadeLevel;
+    [SerializeField] private TMP_Text upgradeLv;
 
     [HideInInspector] public ItemData data = null;
 
@@ -25,7 +25,7 @@ public class Item_Inventory : MonoBehaviour
         icon.gameObject.SetActive(false);
         icon.sprite = null;
         level.text = string.Empty;
-        upgeadeLevel.text = string.Empty;
+        upgradeLv.text = string.Empty;
 
         frameSprites = Resources.LoadAll<Sprite>($"{Define.iconFramePath}/");
     }
@@ -43,7 +43,7 @@ public class Item_Inventory : MonoBehaviour
         string path = $"{Define.iconBasePath}/{data.type}/{data.spriteName}";
 
         level.text = $"Lv{data.lv}";
-        upgeadeLevel.text = $"+{data.upradeLv}";
+        upgradeLv.text = $"+{data.upgradeLv}";
         icon.sprite = Resources.Load<Sprite>(path);
 
         for (int i = 0; i < frameSprites.Length; i++)   //레벨에 해당되는 프레임(배경) 생성
@@ -62,7 +62,7 @@ public class Item_Inventory : MonoBehaviour
     {
         icon.gameObject.SetActive(false);
         level.text = string.Empty;
-        upgeadeLevel.text = string.Empty;
+        upgradeLv.text = string.Empty;
         frame.sprite = frameSprites[0];
 
         if(action != null)
