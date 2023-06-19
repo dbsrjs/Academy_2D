@@ -10,14 +10,15 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Item_Inventory item;
     [SerializeField] private Transform parent;
     [SerializeField] private TMP_Text inventoryCountTxt;
-    [SerializeField] private Transform content;    //GameObject
+    [SerializeField] private Transform content;
 
     int itemCount = 0;
-    List<Item_Inventory> items = new List<Item_Inventory>();
+    int invenMaxCount = 10;    //아이템 이미지의 최대 개수
 
+    List<Item_Inventory> items = new List<Item_Inventory>();
     Dictionary<string, List<string>> dicItemNames = new Dictionary<string, List<string>>();
 
-    public int ItemCount
+    public int ItemCount    //카운트 개수
     {
         get { return itemCount; }
         set
@@ -27,17 +28,17 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    int invenMaxCount = 10;    //아이템 이미지의 최대 개수
-
     // Start is called before the first frame update
     void Start()
     {
-        string[] keys = { $"{IconType.Armor}", $"{IconType.Helmet}", $"{IconType.Boots}" };
-        string[] paths = {
-            $"{Define.iconBasePath}/{IconType.Armor}",
-            $"{Define.iconBasePath}/{IconType.Helmet}",
-            $"{Define.iconBasePath}/{IconType.Boots}"
-        };
+        List<string> paths = new List<string>();
+        List<string> keys = new List<string>();
+        IconType lastIndex = System.Enum.GetValues(typeof(IconType)).Cast<IconType>().Last();
+        for (int i = 0; i <= (int)lastIndex; i++)
+        {
+            paths.Add($"{Define.iconBasePath} / {(IconType)i}");
+            keys.Add(((IconType)i).ToString());
+        }
 
         foreach (var key in keys)
         {
@@ -47,15 +48,13 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        int KeyCnt = 0;
-        foreach (var path in paths)
+        for (int i = 0; i < paths.Count; i++)
         {
-            Sprite[] sprites = Resources.LoadAll<Sprite>(path);
+            Sprite[] sprites = Resources.LoadAll<Sprite>(paths[i]);
             foreach (var item in sprites)
             {
-                dicItemNames[keys[KeyCnt]].Add(item.name);
+                dicItemNames[keys[i]].Add(item.name);
             }
-            KeyCnt++;
         }
 
         for (int i = 0; i < invenMaxCount; i++)     //배경을 invenMaxCount(10)개 생성
@@ -64,32 +63,28 @@ public class Inventory : MonoBehaviour
         }
         itemCount = 0;
     }
-    int creatIdx = 0;
 
-    enum Type
-    {
-        Armor, Helmet, Boots
-    }
+
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))   //아이템 생성
         {
+            if (ItemCount >= invenMaxCount)
+                return;
+
             ItemData id = new ItemData();
-            id.idx = creatIdx;
             id.lv = Random.Range(1, 100);   //랜덤 레벨
             id.upgradeLv = Random.Range(1, 31);  //랜덤 강화 레벨
 
-            Type t = (Type)Random.Range(0, (int)Type.Boots + 1);
-            id.type = (IconType)System.Enum.Parse(typeof(IconType), t.ToString());
+            IconType lastIndex = System.Enum.GetValues(typeof(IconType)).Cast<IconType>().Last();
 
             string key = id.type.ToString();
             id.spriteName = dicItemNames[key][Random.Range(0, dicItemNames[key].Count)];
 
-            creatIdx++;
             foreach (var item in items)
             {
-                if(item.data  == null)
+                if (item.data == null)
                 {
                     item.SetData(id, () => ItemCount-- ).SetUI();
                     ItemCount++;
@@ -105,30 +100,75 @@ public class Inventory : MonoBehaviour
         (
             delegate (Item_Inventory a1, Item_Inventory a2)
             {
-                if (a1.data.type != a2.data.type)
+                if (a1.data != null && a2.data != null)
                 {
-                    return a2.data.type.CompareTo(a1.data.type);
+                    if (a1.data.type != a2.data.type)
+                    {
+                        return a2.data.type.CompareTo(a1.data.type);
+                    }
+                    return a2.data.lv.CompareTo(a1.data.lv);
                 }
-                return a1.data.lv.CompareTo(a2.data.lv);
+                else
+                {
+                    return 0;
+                }
             }
         );
 
         List<ItemData> dataList = new List<ItemData>();
         foreach (var item in items)
         {
-            ItemData id = new ItemData();
-            id.idx = item.data.idx;
-            id.lv = item.data.lv;
-            id.spriteName = item.data.spriteName;
-            id.type = item.data.type;
-            id.upgradeLv = item.data.upgradeLv;
-            dataList.Add(id);
+            if (item.data != null)
+            {
+                ItemData id = new ItemData();
+                id.idx = item.data.idx;
+                id.lv = item.data.lv;
+                id.spriteName = item.data.spriteName;
+                id.type = item.data.type;
+                id.upgradeLv = item.data.upgradeLv;
+                dataList.Add(id);
+            }
         }
 
         for (int i = 0; i < content.childCount; i++)
         {
-            ItemData id = dataList[i];
-            content.GetChild(i).GetComponent<Item_Inventory>().SetData(id, () => ItemCount--).SetUI();
+            try
+            {
+                ItemData id = dataList[i];
+                content.GetChild(i).GetComponent<Item_Inventory>().SetData(id, () => ItemCount--).SetUI();
+            }
+            catch (System.ArgumentOutOfRangeException e) {
+                content.GetChild(i).GetComponent<Item_Inventory>().Empty();
+            }
         }
+    }
+
+    public void InvenTabChange(int tabIndex)
+    {
+        IconType it = (IconType)tabIndex;
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].data != null)
+            {
+                if (items[i].data.type != it)
+                    items[i].Empty();
+                else
+                   items[i].SetUI();
+            }
+        }
+    }
+
+    public void OnInventoryAddCount()
+    {
+        int addCount = 10;
+        for (int i = 0; i < addCount; i++)
+        {
+            Item_Inventory temp = Instantiate(item, parent);
+            temp.name = i.ToString();
+            items.Add(temp);
+        }
+        invenMaxCount += addCount;
+
+        ItemCount = ItemCount;
     }
 }

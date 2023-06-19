@@ -22,14 +22,20 @@ public class Item_Inventory : MonoBehaviour
 
     void Start()
     {
+        frameSprites = Resources.LoadAll<Sprite>($"{Define.iconFramePath}/");
+
+        Empty();
+    }
+
+    public void Empty()
+    {
         icon.gameObject.SetActive(false);
         icon.sprite = null;
         level.text = string.Empty;
         upgradeLv.text = string.Empty;
-
-        frameSprites = Resources.LoadAll<Sprite>($"{Define.iconFramePath}/");
+        
+        frame.sprite = frameSprites[0];
     }
-
     public Item_Inventory SetData(ItemData data, UnityAction action = null)
     {
         this.data = data;
